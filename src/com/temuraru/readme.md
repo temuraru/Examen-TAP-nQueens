@@ -1,3 +1,8 @@
+
+Usage:
+    javac com/temuraru/Main.java
+    java main
+
 Resources:
 - read user input:
     http://www.homeandlearn.co.uk/java/user_input.html

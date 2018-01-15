@@ -20,6 +20,8 @@ public class Main {
         Board board = new Board(size);
         board.addQueen(randomX,randomY);
         board.display();
+        System.out.println("Finding solution...");
+        board.solve();
 
         System.out.println("Finished...");
     }
