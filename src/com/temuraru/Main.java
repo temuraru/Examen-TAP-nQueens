@@ -5,6 +5,9 @@ import java.util.Scanner;
 import static java.lang.Integer.MAX_VALUE;
 
 /**
+ * Run:
+ * - "C:\Program Files\Java\jdk1.8.0_151\bin\javac" [src/com/temuraru/Main.java
+ * - "C:\Program Files\Java\jdk1.8.0_151\bin\java" ]
  * Results (with displaying failed boards)
  *
  * Board size:			    64 * 64
@@ -30,6 +33,14 @@ import static java.lang.Integer.MAX_VALUE;
  * Finished after:			11879 retries
  * Time Elapsed:			23 seconds
  *
+ *
+ * Board size:				500 * 500
+ * Finished after:			40109 retries
+ * Time Elapsed:			365 seconds
+ *
+ * Board size:				1200 * 1200
+ * Finished after:			70191 retries
+ * Time Elapsed:			6169 seconds
  */
 public class Main {
     public static void main(String[] args) {
@@ -37,15 +48,18 @@ public class Main {
         System.out.print("Please input the number of queens: ");
         Scanner sc = new Scanner(System.in);
         int size = sc.nextInt();
+        while (size <= 4) {
+            System.out.print("Please chose a size > 4: ");
+            size = sc.nextInt();
+        }
 
         long startTime = System.nanoTime();
-        boolean retryQueenOnSameRow = true;
 
         int retries = 0;
         while (retries++ < MAX_VALUE) {
             Board board = new Board(size);
             System.out.println("Finding a solution... Retry #" + retries);
-            boolean solution = board.solve(retryQueenOnSameRow);
+            boolean solution = board.solve();
             if (solution) {
                 board.display();
                 break;
@@ -54,11 +68,10 @@ public class Main {
             }
         }
 
-        int timeElapsed = (int)((System.nanoTime() - startTime) / 1_000_000_000L);
+        int timeElapsed = (int)((System.nanoTime() - startTime) / 1000000000);
 
         System.out.println("Board size:\t\t\t\t" + size + " * " + size);
         System.out.println("Finished after:\t\t\t" + retries + " retries");
         System.out.println("Time Elapsed:\t\t\t" + timeElapsed + " seconds");
-
     }
 }

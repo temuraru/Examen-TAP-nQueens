@@ -62,10 +62,9 @@ public class Board {
     }
     /**
      * Try to find a solution for the current board
-     * @param retryQueenOnSameRow boolean
      * @return boolean
      */
-    public boolean solve(boolean retryQueenOnSameRow) {
+    public boolean solve() {
         Random rand = new Random();
         int validQueensFound = 0;
         for(int row = 0; row < size; row++) {
@@ -76,13 +75,7 @@ public class Board {
             List<Integer> validPositions = getValidPositionsOnRow(row);
 //            System.out.println("validPositions for row " + row + ": " + validPositions.toString());
 
-            // 2 alternatives: either choose one (x, y) position - random and valid,
-            // or try to choose one for size failures
-            int limit = this.size - 1;
-            if (retryQueenOnSameRow) {
-                limit = 0;
-            }
-
+            int limit = 0;
             while (limit ++ < this.size) {
                 // choose a random column from the available valid positions on the current row
                 randomColumn = getValidRandomColumnOnRow(validPositions, rand);
