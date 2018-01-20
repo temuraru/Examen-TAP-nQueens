@@ -5,6 +5,9 @@ import java.util.Scanner;
 import static java.lang.Integer.MAX_VALUE;
 
 /**
+ * Run:
+ * - "C:\Program Files\Java\jdk1.8.0_151\bin\javac" [src/com/temuraru/Main.java
+ * - "C:\Program Files\Java\jdk1.8.0_151\bin\java" ]
  * Results (with displaying failed boards)
  *
  * Board size:			    64 * 64
@@ -30,6 +33,14 @@ import static java.lang.Integer.MAX_VALUE;
  * Finished after:			11879 retries
  * Time Elapsed:			23 seconds
  *
+ *
+ * Board size:				500 * 500
+ * Finished after:			40109 retries
+ * Time Elapsed:			365 seconds
+ *
+ * Board size:				1200 * 1200
+ * Finished after:			70191 retries
+ * Time Elapsed:			6169 seconds
  */
 public class Main {
     public static void main(String[] args) {
@@ -39,13 +50,12 @@ public class Main {
         int size = sc.nextInt();
 
         long startTime = System.nanoTime();
-        boolean retryQueenOnSameRow = true;
 
         int retries = 0;
         while (retries++ < MAX_VALUE) {
             Board board = new Board(size);
             System.out.println("Finding a solution... Retry #" + retries);
-            boolean solution = board.solve(retryQueenOnSameRow);
+            boolean solution = board.solve();
             if (solution) {
                 board.display();
                 break;
